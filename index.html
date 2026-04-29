@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Exchange App</title>
+
+ <link ahref="kevin.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+        
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 10px 0;
+            font-size: 32px;
+            color: #00ffd5;
+        }
+
+        .logo-row {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            justify-content: center;
+        }
+
+        .logo-row img {
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .logo-row img:hover {
+            transform: scale(1.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.4);
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 15px;
+            background: #00ffd5;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background: #00bfa6;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero button {
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            background: #00ffd5;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .hero button a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .hero button:hover {
+            background: #00bfa6;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="dot.png" width="100" height="100">
+    <h1>CURRENCY EXCHANGE APP</h1>
+</header>
+
+<div class="logo-row">
+    <img src="eeee.png" width="150" height="150">
+    <img src="eeee.png" width="150" height="150">
+    <img src="eeee.png" width="150" height="150">
+    <img src="eeee.png" width="150" height="150">
+    <img src="eeee.png" width="150" height="150">
+</div>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="converter.html">Full Converter</a>
+    <a href="details.html">Currency Details</a>
+    <a href="history.html">History</a>
+    <a href="settings.html">Settings</a>
+</nav>
+
+<div class="hero">
+    <p>Convert currencies easier and faster with real-time experience.</p>
+    <button><a href="convert.html">CONVERT NOW</a></button>
+</div>
+</body>
+
+</html>

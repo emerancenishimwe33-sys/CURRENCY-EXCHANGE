@@ -1,0 +1,193 @@
+<DOCTYPE html>
+    <html>
+        <head>
+     <!--comment-->       <link ahref="kevin.css" rel="stylesheet"><!--comment--> 
+             <meta charset="UTF-8">
+  <title>Currency Info Selector</title>
+  <link rel="stylesheet" href="style.css">
+
+            <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin:0;
+            background: linear-gradient(to right,#0f2027,#203a43,#2c5364);
+            color:white;
+        }
+
+        nav{
+            display:flex;
+            gap:10px;
+            justify-content:center;
+            padding:10px;
+            background:rgba(0,0,0,0.4);
+            flex-wrap:wrap;
+        }                                                      
+
+        nav a{                                                         
+            text-decoration:none;
+            color:white;
+            background:#00ffd5;
+            padding:10px 15px;
+            border-radius:6px;
+            font-weight:bold;
+        }
+
+        nav a:hover{
+            background:#00bfa6;
+        }
+
+        .container{
+            max-width:900px;
+            margin:auto;
+            padding:20px;
+        }
+
+        .page-header{
+            text-align:center;
+            margin-bottom:20px;
+        }
+
+        .converter-card{
+            background:rgba(255,255,255,0.08);
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 0 10px rgba(0,0,0,0.3);
+        }
+
+        label{
+            display:block;
+            margin-top:10px;
+            margin-bottom:5px;
+        }
+
+        input,select{
+            width:100%;
+            padding:10px;
+            border-radius:6px;
+            border:none;
+        }
+
+        button{
+            margin-top:15px;
+            padding:12px;
+            width:100%;
+            background:#00ffd5;
+            border:none;
+            border-radius:6px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#00bfa6;
+        }
+
+        .result{
+            margin-top:15px;
+            font-size:20px;
+            text-align:center;
+        }
+        select{
+            background-color: lightpink;
+            color: black;
+            
+        }
+        option{
+            background-color: rgb(25, 0, 255);
+        }
+        H2{
+            text-align: center;
+            background-color: green;
+        }
+    </style>
+    <body>
+
+<header style="text-align:center;padding:10px;">
+    <img src="dot.png" width="80" height="80">
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="converter.html">Full Converter</a>
+    <a href="details.html">Currency Details</a>
+    <a href="history.html">History</a>
+    <a href="settings.html">Settings</a>
+</nav>
+<h2>CURRENCY INFO</h2>
+ CURRENCY
+
+    <select id="fromCurrency">
+  <option value="RWF">RWF - Rwandan Franc</option>
+  <option value="USD">USD - US Dollar</option>
+  <option value="EUR">EUR - Euro</option>
+  <option value="GBP">GBP - British Pound</option>
+  <option value="KES">KES - Kenyan Shilling</option>
+</select>&nbsp&nbsp&nbsp
+
+
+COUNTRY
+<select id="country">
+  <option value="Rwanda">Rwanda RW</option>
+  <option value="USA us">USA US</option>
+  <option value="EU">Europe EU</option>
+  <option value="GBP">UK GB</option>
+  <option value="KES">Kenya KE</option>
+</select>&nbsp&nbsp&nbsp
+SYMBOLS
+<select id="symbol">
+  <option value="USD">$</option>
+  <option value="RWF">RWF</option>
+  <option value="EUR"> €</option>
+  <option value="GBP">£</option>
+  <option value="KES">Ksh</option>
+</select>
+
+<h2><u>Rate Trends</u></h2>
+<canvas id="trendChart" width="400" height="200"></canvas>
+
+<h2>Compare with Other Currencies</h2>
+<ul>
+    <li>1 USD = 1300 RWF</li>
+    <li>1 EUR = 1400 RWF</li>
+    <li>1 GBP = 1600 RWF</li>
+</ul>
+
+<h2>Historical Rates (Mock Data)</h2>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Date</th>
+        <th>USD → RWF</th>
+    </tr>
+    <tr><td>2026-04-20</td><td>1280</td></tr>
+    <tr><td>2026-04-22</td><td>1290</td></tr>
+    <tr><td>2026-04-24</td><td>1300</td></tr>
+    <tr><td>2026-04-26</td><td>1310</td></tr>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('trendChart').getContext('2d');
+
+const trendChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Apr 20', 'Apr 22', 'Apr 24', 'Apr 26'],
+        datasets: [{
+            label: 'USD to RWF',
+            data: [1280, 1290, 1300, 1310],
+            borderWidth: 2,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true
+            }
+        }
+    }
+});
+</script>
+</body>
+<html>
