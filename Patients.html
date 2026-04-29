@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>Patients System</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+
+header{
+    background-color: aquamarine;
+    color: black;
+    height: 17em;
+}
+nav{
+    background-color: lightskyblue;
+    color: black;
+    height: 19em;
+}
+body{
+    background-color: grey;
+color: aqua;
+}
+button{
+    outline: none;
+    color: aquamarine;
+    background: yellow;
+    }
+    input{
+        width: 10em;
+        height: 1.5em;
+    }
+    submit{
+        background-color: gray;
+        height: 1.5em;
+    
+    }
+    footer{
+        background-color: aquamarine;
+        color: black;
+        height: 7em;
+    }
+body {
+    font-family: Arial;
+    background: #eef2f7;
+}
+
+.container {
+    width: 450px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+button {
+    background: olivedrab;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+    
+</style>
+</head>
+<body>
+    <h1>LOCAL CLINIC HEALTH</h1>
+<header>
+<img src="logo 1.png" controls width="150" height="150">
+<h1>SYSTEM CLINIC      ADMIN</h1>
+<button><a href="Dashboard.html">Dashboard</a></button>&nbsp&nbsp&nbsp
+<button><a href="Check-in.html">Check-in</a></button>&nbsp&nbsp&nbsp
+<button><a href="Patients.html">Patients</a></button>&nbsp&nbsp&nbsp
+<button><a href="Reports.html">Reports</a></button>&nbsp&nbsp&nbsp
+<button><a href="Queue.html">Queue</a></button>&nbsp&nbsp&nbsp
+</header><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="container">
+    <h2>Register Patient</h2>
+
+    <form id="patientForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="date" id="dob" required>
+
+        <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select>
+
+        <input type="text" id="phone" placeholder="Phone">
+        <input type="text" id="address" placeholder="Address">
+
+        <input type="text" id="blood" placeholder="Blood Group">
+        <input type="text" id="allergy" placeholder="Allergies">
+
+        <input type="text" id="insurance" placeholder="Insurance Provider">
+
+        <button type="submit">Save Patient</button>
+    </form>
+
+    <h3>Patients List</h3>
+    <input type="text" id="search" placeholder="Search patient...">
+
+    <ul id="patientList"></ul>
+</div>
+
+<script src="script.js">
+    document.getElementById("patientForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let patient = {
+        id: Date.now(),
+        name: document.getElementById("name").value,
+        dob: document.getElementById("dob").value,
+        gender: document.getElementById("gender").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        blood: document.getElementById("blood").value,
+        allergy: document.getElementById("allergy").value,
+        insurance: document.getElementById("insurance").value
+    };
+
+    savePatient(patient);
+    displayPatients();
+    this.reset();
+});
+
+function savePatient(patient) {
+    let patients = JSON.parse(localStorage.getItem("patients")) || [];
+    patients.push(patient);
+    localStorage.setItem("patients", JSON.stringify(patients));
+}
+
+function displayPatients(filter="") {
+    let list = document.getElementById("patientList");
+    list.innerHTML = "";
+
+    let patients = JSON.parse(localStorage.getItem("patients")) || [];
+
+    patients
+        .filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(p => {
+            let li = document.createElement("li");
+            li.innerHTML = `
+                <b>${p.name}</b> (${p.gender}) <br>
+                Phone: ${p.phone} <br>
+                Blood: ${p.blood} <br>
+                <button onclick="deletePatient(${p.id})">Delete</button>
+            `;
+            list.appendChild(li);
+        });
+}
+
+function deletePatient(id) {
+    let patients = JSON.parse(localStorage.getItem("patients")) || [];
+    patients = patients.filter(p => p.id !== id);
+    localStorage.setItem("patients", JSON.stringify(patients));
+    displayPatients();
+}
+
+document.getElementById("search").addEventListener("input", function() {
+    displayPatients(this.value);
+});
+
+// load igihe page ifunguwe
+displayPatients();
+</script>
+</body>
+</html>

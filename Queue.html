@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+    <meta charset="UTF-8">
+    <title>Queue System</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+header{
+    background-color: aquamarine;
+    color: black;
+    height: 17em;
+}
+nav{
+    background-color: lightskyblue;
+    color: black;
+    height: 19em;
+}
+body{
+    background-color: grey;
+color: aqua;
+}
+button{
+    outline: none;
+    color: aquamarine;
+    background: yellow;
+    }
+    input{
+        width: 10em;
+        height: 1.5em;
+    }
+    submit{
+        background-color: gray;
+        height: 1.5em;
+    
+    }
+    footer{
+        background-color: aquamarine;
+        color: black;
+        height: 7em;
+    }
+body {
+    font-family: Arial;
+    background: #46586e;
+}
+
+.container {
+    width: 400px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+button {
+    background: yellowgreen;
+    color: black;
+    border: none;
+}
+
+#current {
+    font-size: 20px;
+    color: green;
+    margin: 10px 0;
+}
+
+    
+</style>
+</head>
+<body>
+    <h1>LOCAL CLINIC HEALTH</h1>
+<header>
+<img src="logo 1.png" controls width="150" height="150">
+<h1>SYSTEM CLINIC      ADMIN</h1>
+<button><a href="Dashboard.html">Dashboard</a></button>&nbsp&nbsp&nbsp
+<button><a href="Check-in.html">Check-in</a></button>&nbsp&nbsp&nbsp
+<button><a href="Patients.html">Patients</a></button>&nbsp&nbsp&nbsp
+<button><a href="Reports.html">Reports</a></button>&nbsp&nbsp&nbsp
+<button><a href="Queue.html">Queue</a></button>&nbsp&nbsp&nbsp
+</header><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="container">
+    <h2>Hospital Queue System</h2>
+
+    <form id="queueForm">
+        <input type="text" id="name" placeholder="Patient Name" required>
+
+        <select id="department">
+            <option>OPD</option>
+            <option>Maternity</option>
+            <option>Pediatrics</option>
+        </select>
+
+        <button type="submit">Add to Queue</button>
+    </form>
+
+    <h3>Current Patient</h3>
+    <div id="current">None</div>
+
+    <button onclick="nextPatient()">Call Next</button>
+
+    <h3>Queue List</h3>
+    <ul id="queueList"></ul>
+</div>
+
+<script src="script.js">
+    let queue = JSON.parse(localStorage.getItem("queue")) || [];
+let currentPatient = null;
+
+// generate queue number
+function generateQueueNumber() {
+    return "Q" + String(queue.length + 1).padStart(3, "0");
+}
+
+// add patient
+document.getElementById("queueForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let patient = {
+        id: Date.now(),
+        number: generateQueueNumber(),
+        name: document.getElementById("name").value,
+        department: document.getElementById("department").value,
+        status: "Waiting"
+    };
+
+    queue.push(patient);
+    saveQueue();
+    displayQueue();
+
+    this.reset();
+});
+
+// call next patient
+function nextPatient() {
+    if (queue.length === 0) return;
+
+    currentPatient = queue.shift();
+    currentPatient.status = "In Progress";
+
+    document.getElementById("current").textContent =
+        currentPatient.number + " - " + currentPatient.name;
+
+    saveQueue();
+    displayQueue();
+}
+
+// display queue
+function displayQueue() {
+    let list = document.getElementById("queueList");
+    list.innerHTML = "";
+
+    queue.forEach(p => {
+        let li = document.createElement("li");
+        li.textContent = p.number + " - " + p.name + " (" + p.department + ")";
+        list.appendChild(li);
+    });
+}
+
+// save
+function saveQueue() {
+    localStorage.setItem("queue", JSON.stringify(queue));
+}
+
+// load on start
+displayQueue();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

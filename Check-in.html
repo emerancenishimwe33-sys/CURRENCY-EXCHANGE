@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <title>Patient Check-in</title>
+    <link rel="stylesheet" href="style.css">
+<style>
+header{
+    background-color: aquamarine;
+    color: black;
+    height: 17em;
+}
+nav{
+    background-color: lightskyblue;
+    color: black;
+    height: 19em;
+}
+body{
+    background-color: grey;
+color: aqua;
+}
+button{
+    outline: none;
+    color: aquamarine;
+    background: yellow;
+    }
+    input{
+        width: 10em;
+        height: 1.5em;
+    }
+    submit{
+        background-color: gray;
+        height: 1.5em;
+    
+    }
+    footer{
+        background-color: aquamarine;
+        color: black;
+        height: 7em;
+    }
+
+
+    
+</style>
+</head>
+<body>
+    <h1>LOCAL CLINIC HEALTH</h1>
+<header>
+<img src="logo 1.png" controls width="150" height="150">
+<h1>SYSTEM CLINIC      ADMIN</h1>
+<button><a href="Dashboard.html">Dashboard</a></button>&nbsp&nbsp&nbsp
+<button><a href="Check-in.html">Check-in</a></button>&nbsp&nbsp&nbsp
+<button><a href="Patients.html">Patients</a></button>&nbsp&nbsp&nbsp
+<button><a href="Reports.html">Reports</a></button>&nbsp&nbsp&nbsp
+<button><a href="Queue.html">Queue</a></button>&nbsp&nbsp&nbsp
+</header>
+
+
+<div class="container">
+    <h2>Patient Check-in</h2>
+
+    <form id="checkinForm">
+        <input type="text" placeholder="Full Name" id="name" required><br><br>
+        <input type="date" id="dob" required><br><br>
+
+        <select id="gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select><br><br>
+
+        <input type="text" placeholder="Phone Number" id="phone"><br><br>
+        <input type="text" placeholder="Address" id="address"><br><br>
+
+        <input type="text" placeholder="Reason for Visit" id="reason"><br><br>
+        
+        <select id="department">
+            <option>OPD</option>
+            <option>Maternity</option>
+            <option>Pediatrics</option>
+        </select><br><br>
+
+        <select id="payment">
+            <option>Cash</option>
+            <option>Insurance</option>
+            <option>Mobile Money</option>
+        </select><br><br>
+
+        <button type="submit">Check-in</button>
+    </form>
+
+    <h3>Patients List</h3>
+    <ul id="patientList"></ul>
+</div>
+
+<script src="script.js">
+document.getElementById("checkinForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+    let reason = document.getElementById("reason").value;
+
+    let patient = {
+        name: name,
+        reason: reason,
+        time: new Date().toLocaleTimeString()
+    };
+
+    savePatient(patient);
+    displayPatients();
+
+    this.reset();
+});
+
+function savePatient(patient) {
+    let patients = JSON.parse(localStorage.getItem("patients")) || [];
+    patients.push(patient);
+    localStorage.setItem("patients", JSON.stringify(patients));
+}
+
+function displayPatients() {
+    let list = document.getElementById("patientList");
+    list.innerHTML = "";
+
+    let patients = JSON.parse(localStorage.getItem("patients")) || [];
+
+    patients.forEach(p => {
+        let li = document.createElement("li");
+        li.textContent = p.name + " - " + p.reason + " (" + p.time + ")";
+        list.appendChild(li);
+    });
+}
+
+// load data igihe page ifunguwe
+displayPatients();
+</script>
+</body></html>

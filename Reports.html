@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+header{
+    background-color: aquamarine;
+    color: black;
+    height: 17em;
+}
+nav{
+    background-color: lightskyblue;
+    color: black;
+    height: 19em;
+}
+body{
+    background-color: grey;
+color: aqua;
+}
+button{
+    outline: none;
+    color: aquamarine;
+    background: yellow;
+    }
+    input{
+        width: 10em;
+        height: 1.5em;
+    }
+    submit{
+        background-color: gray;
+        height: 1.5em;
+    
+    }
+    footer{
+        background-color: aquamarine;
+        color: black;
+        height: 7em;
+    }
+    body {
+    font-family: Arial;
+    background: #3f5980;
+}
+
+.container {
+    width: 800px;
+    margin: auto;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    background: mediumaquamarine;
+    padding: 20px;
+    width: 30%;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+    
+</style>
+</head>
+<body>
+    <h1>LOCAL CLINIC HEALTH</h1>
+<header>
+<img src="logo 1.png" controls width="150" height="150">
+<h1>SYSTEM CLINIC      ADMIN</h1>
+<button><a href="Dashboard.html">Dashboard</a></button>&nbsp&nbsp&nbsp
+<button><a href="Check-in.html">Check-in</a></button>&nbsp&nbsp&nbsp
+<button><a href="Patients.html">Patients</a></button>&nbsp&nbsp&nbsp
+<button><a href="Reports.html">Reports</a></button>&nbsp&nbsp&nbsp
+<button><a href="Queue.html">Queue</a></button>&nbsp&nbsp&nbsp
+</header>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Hospital Reports Dashboard</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Patients</h3>
+            <p id="totalPatients">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Visits</h3>
+            <p id="totalVisits">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Revenue</h3>
+            <p id="revenue">0</p>
+        </div>
+    </div>
+
+    <canvas id="barChart"></canvas>
+    <canvas id="pieChart"></canvas>
+</div>
+
+<script src="script.js">
+    // Fake data (ushobora gusimbuza na localStorage data)
+let patients = JSON.parse(localStorage.getItem("patients")) || [];
+let visits = [
+    { department: "OPD", count: 20 },
+    { department: "Maternity", count: 10 },
+    { department: "Pediatrics", count: 15 }
+];
+
+let revenue = 350000;
+
+// update summary
+document.getElementById("totalPatients").textContent = patients.length;
+document.getElementById("totalVisits").textContent = visits.reduce((a, b) => a + b.count, 0);
+document.getElementById("revenue").textContent = revenue + " RWF";
+
+// BAR CHART
+let ctx1 = document.getElementById("barChart").getContext("2d");
+
+new Chart(ctx1, {
+    type: "bar",
+    data: {
+        labels: visits.map(v => v.department),
+        datasets: [{
+            label: "Visits per Department",
+            data: visits.map(v => v.count)
+        }]
+    }
+});
+
+// PIE CHART
+let ctx2 = document.getElementById("pieChart").getContext("2d");
+
+new Chart(ctx2, {
+    type: "pie",
+    data: {
+        labels: ["Cash", "Insurance", "Mobile Money"],
+        datasets: [{
+            data: [150000, 120000, 80000]
+        }]
+    }
+});
+</script>
+</body>
+</html>
