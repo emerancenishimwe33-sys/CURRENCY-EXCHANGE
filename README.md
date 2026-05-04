@@ -1,3 +1,6 @@
+NISHIMWE EMERANCE
+NIYONGIRA EZECHIAS DIEUVEUT
+LEVER 3 SOD A
 The Currency Exchange App:
 is a simple web application that converts one currency to another
 using exchange rates, allowing users to quickly check values between different currencies
